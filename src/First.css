@@ -1,0 +1,26 @@
+#container1{
+    border: 2px solid red;
+    width: 500px;
+    margin: auto ;
+    margin-top: 300px;
+}
+#form{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-left: 50px;
+}
+#Username{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#Pass{
+    margin-bottom: 20px;
+}
+#email{
+    margin-bottom: 20px;
+}
+/* #Submit{
+    
+} */
