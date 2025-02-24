@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true })); // Optional: Support form submissions
 
 // Signup Route
-app.post("/signup", async (req, res) => {
+app.get("/signup", async (req, res) => {
     const { user, pass, email } = req.body;
 
     // Validate input
