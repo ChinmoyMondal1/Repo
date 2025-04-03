@@ -1,16 +1,111 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const { DbOperations, LoginOp } = require('./DbFiles/DbOperation');
-// const { password } = require('./DbFiles/DbConfig');
-
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 const app = express();
 const PORT = 4000;
-
-// Middleware
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true })); // Optional: Support form submissions
+
+
+const options = {
+    definition:{
+      openapi: '3.0.0',
+      info:{
+        title: 'Nodejs Api SQL',
+        version :"1.0.0"
+      },
+      servers :[
+            {
+           url: 'http://localhost:4000/'
+  
+            }
+      ] 
+    },
+    apis:['./server.js']
+  }
+  const swaggeSpec =  swaggerJSDoc(options);
+  app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggeSpec));
+const { DbOperations, LoginOp } = require('./DbFiles/DbOperation');
+// const { password } = require('./DbFiles/DbConfig');
+
+
+
+// Middleware
+
+/**
+@swagger
+* paths:
+*   /signup:
+*     post:
+*       summary: User Signup
+*       description: Registers a new user by providing a username, password, and email.
+*       tags:
+*         - Authentication
+*       requestBody:
+*         required: true
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               required:
+*                 - user
+*                 - pass
+*                 - email
+*               properties:
+*                 user:
+*                   type: string
+*                   description: "* The username of the user."
+*                 pass:
+*                   type: string
+*                   description: "* The password for the user account."
+*                 email:
+*                   type: string
+*                   format: email
+*                   description: "* The email address of the user."
+*       responses:
+*         201:
+*           description: "* Signup Successful"
+*           content:
+*             application/json:
+*               schema:
+*                 type: object
+*                 properties:
+*                   success:
+*                     type: boolean
+*                     example: true
+*                   message:
+*                     type: string
+*                     example: "Signup Successful!"
+*         400:
+*           description: "* Bad Request - Missing required fields"
+*           content:
+*             application/json:
+*               schema:
+*                 type: object
+*                 properties:
+*                   success:
+*                     type: boolean
+*                     example: false
+*                   message:
+*                     type: string
+*                     example: "All fields must be filled"
+*         500:
+*           description: "* Internal Server Error"
+*           content:
+*             application/json:
+*               schema:
+*                 type: object
+*                 properties:
+*                   success:
+*                     type: boolean
+*                     example: false
+*                   message:
+*                     type: string
+*                     example: "Internal Server Error"
+ */
 
 // Signup Route
 app.post("/signup", async (req, res) => {
