@@ -48,7 +48,7 @@ const First = () => {
   return (
     <div id='Main'>
       <div id='container1' style={{
-        backgroundColor:'blue'
+        backgroundColor:'grey'
       }}>
         
       <form onSubmit={handleSubmit} id='form'>
