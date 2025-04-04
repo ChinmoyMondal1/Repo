@@ -20,7 +20,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:4000/login", {
+      const response = await fetch("https://dummydb.netlify.app/Login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
